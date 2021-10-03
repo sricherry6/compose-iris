@@ -1,31 +1,32 @@
 version: '3'
 
 services:
-  processr:
+  ## the following are all existing ones for diabetes dataset
+  processrd:
     deploy:
       replicas: 1
-    build: processr
+    build: processrd
     environment:
-      - TRAINR_ENDPOINT=http://trainr:7777
+      - TRAINR_D_ENDPOINT=http://trainrd:7770
     ports:
-      - "8888:8888"
+      - "8880:8880"
 
-  trainr:
+  trainrd:
     deploy:
       replicas: 1
-    build: trainr
+    build: trainrd
     environment:
-      - PREDICTR_ENDPOINT=http://predictr:9999
+      - PREDICTR_D_ENDPOINT=http://predictrd:9990
     ports:
-      - "7777:7777"
+      - "7770:7770"
     volumes:
       - ./models:/app/models
 
-  predictr:
+  predictrd:
     deploy:
       replicas: 1
-    build: predictr
+    build: predictrd
     ports:
-      - "9999:9999"
+      - "9990:9990"
     volumes:
       - ./models:/app/models
